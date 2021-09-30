@@ -1,0 +1,62 @@
+---
+title: "week 2 notes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Week 2 Notes
+
+Vectors: linear set of numbers
+
+```{r}
+(vector <- c(1,10,100)) # if you put a parenthetical around the function it will run the function and return the value 
+
+vector[2] # return second number  ## this is called indexing or subsetting
+
+vector[c(2,2)] # return second vector twice
+
+rev(vector) # reverse order 
+
+vector <- c(vector,1000) # add a number # can use cntrl+enter to run a line of code
+
+```
+
+Strings: linear set of characters
+
+```{r}
+string1 <- c("s", "@", "24", "y")
+
+```
+
+Dataframe: r adds structure to the values once you use the data.frame command 
+picky conglomerate of lists 
+
+```{r}
+data.frame(string1)
+
+df <- data.frame(chr=string1, num=vector)
+```
+list: can really be anything
+essentially a less picky data frame. you can have vectors of different characterse, row lengths, etc. which dataframes are not okay with
+
+```{r}
+
+list <- list('this is a list', 'second part of list') # adding values to list
+
+list <- c(list,2) # let's add a 2 to the list
+
+list[[1]][2] # this is calling up the second item of the list
+
+list <- list(c(list,df)) # add the data frame to this list
+
+str(list)
+
+head(list)
+
+list <- list[[3]] <- df # make the data frame the third item in the list
+list
+
+```
