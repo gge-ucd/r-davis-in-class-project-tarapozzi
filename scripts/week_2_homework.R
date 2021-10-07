@@ -21,6 +21,10 @@ plus10 <- time3+10
 plus10
 
 # PROBLEM THREE: select every other
-
+odds <- seq(from=1, to=length(plus10), by=2) # this is soft coding which means that is updates as you update other parts of code as opposed to hard coding which is when you put a specific #
+odds
+final <- plus10[odds]
+final
+#another option
 final <- plus10[c(TRUE,FALSE)]
 final

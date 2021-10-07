@@ -68,3 +68,45 @@ class(surveys_t)
 # subsetting is a little different
 surveys[,1] # gives us a vector
 surveys_t[,1]
+
+## In class notes
+head(surveys)
+str(surveys) # integer is used so that r can use it with other programs, but it is essentially the same as a number
+# factors are imported as characters, you don't want to turn a character into a factor. NUMBERS AND CHARACTERS ARE BETTER
+# how many species
+length(unique(surveys$species)) #40
+
+# subsetting from a data frame
+surveys[1,2] # row 1 and column 2
+
+# subset a new data frame with only 200 rows
+
+surveys_200 <- surveys[1:200,]
+str(surveys_200)
+
+# last row of survey data
+
+surveys_last <- surveys[nrow(surveys),]
+str(surveys_last)
+tail(surveys)
+
+# row in the middle of the data
+surveys_middle <- surveys[(nrow(surveys)/2),]
+str(surveys_middle)
+
+# mimic head function
+surveys_head <-  surveys[-(7:nrow(surveys)),]
+str(surveys_head)
+
+## FACTORS
+# factors are actually numbers and they have an order 
+?factor()
+species_factor <- factor(surveys$species)
+# it is kind of like a number
+typeof(species_factor)
+# but also considered a factor
+class(species_factor)
+levels(species_factor) # there are 40 levels & the default is alphabetical order 
+
+## factors are generally for likert scales or use for making sure your data is ordered in a certain way for something like a plot
+
