@@ -12,7 +12,7 @@ str(gapminder)
 lifeexp.plot <- gapminder %>%
   group_by(year, continent) %>%
   summarize(mean_lifeexp = mean(lifeExp)) %>%
-  ggplot(., aes(year, mean_lifeexp)) +
+  ggplot(., aes(year, mean_lifeexp)) + 
   geom_point(aes(color = continent)) +
   geom_line(aes(color = continent))
 

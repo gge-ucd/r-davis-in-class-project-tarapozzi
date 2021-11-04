@@ -1,0 +1,50 @@
+---
+title: "week_7_homework"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The x axis labels are all scrunched up because we can’t make the image bigger on the webpage, but if you make it and then zoom it bigger in RStudio it looks much better.
+
+We’ll touch on some intermediate steps here, since it might take quite a few steps to get from start to finish. Here are some things to note:
+
+To get the population difference between 2002 and 2007 for each country, it would probably be easiest to have a country in each row and a column for 2002 population and a column for 2007 population.
+
+Notice the order of countries within each facet. You’ll have to look up how to order them in this way.
+
+Also look at how the axes are different for each facet. Try looking through ?facet_wrap to see if you can figure this one out.
+
+The color scale is different from the default- feel free to try out other color scales, just don’t use the defaults!
+
+The theme here is different from the default in a few ways, again, feel free to play around with other non-default themes.
+
+The axis labels are rotated! Here’s a hint: angle = 45, hjust = 1. It’s up to you (and Google) to figure out where this code goes!
+
+Is there a legend on this plot?
+
+This lesson should illustrate a key reality of making plots in R, one that applies as much to experts as beginners: 10% of your effort gets the plot 90% right, and 90% of the effort is getting the plot perfect. ggplot is incredibly powerful for exploratory analysis, as you can get a good plot with only a few lines of code. It’s also extremely flexible, allowing you to tweak nearly everything about a plot to get a highly polished final product, but these little tweaks can take a lot of time to figure out!
+
+```{r q1}
+library(tidyverse)
+
+gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv") #ONLY change the "data" part of this path if necessary
+
+new_data <- gapminder %>%
+  filter(year %in% c(2002, 2007)) %>%
+  #filter(continent %>% c("Africa", "Americas", "Asia", "Europe")) %>%
+  pivot_wider(id_cols = c(country, continent), names_from = year, values_from = pop) %>%
+  mutate(popDiff = `2007` - `2002`) %>% # have to use special quote let it know that you are refering to a column that happens to look like a number
+  filter(continent != 'Oceania')
+
+plot <- ggplot(new_data, aes(reorder(country, popDiff), popDiff)) +
+  geom_bar(stat = 'identity') + # geom_bar only know how to do this for the x, but when you have a x and y value you have to tell ggplot which value you want it to show. identity tells it show the y value
+  
+  facet_wrap(~continent, scales = "free") +
+  theme(text.axis.x = element_text(colour = 'red', angle = 45)) +
+  theme_bw()
+
+plot
+```
