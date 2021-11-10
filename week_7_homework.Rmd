@@ -41,9 +41,11 @@ new_data <- gapminder %>%
 
 plot <- ggplot(new_data, aes(reorder(country, popDiff), popDiff)) +
   geom_bar(stat = 'identity') + # geom_bar only know how to do this for the x, but when you have a x and y value you have to tell ggplot which value you want it to show. identity tells it show the y value
-  
   facet_wrap(~continent, scales = "free") +
-  theme(text.axis.x = element_text(colour = 'red', angle = 45)) +
+  scale_fill_viridis_b() +
+  xlab("Country") +
+  ylab("Change in Population Between 2002 and 2007") +
+  theme(text.axis.x = element_text(angle = 45, hjust = 1)) +
   theme_bw()
 
 plot
